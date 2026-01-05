@@ -1,0 +1,295 @@
+#%RAML 1.0
+types:
+  Page:
+    type: object
+    properties:
+      tables?:
+        type: object
+        properties:
+          table1:
+            type: array
+            items:
+              type: object
+              properties:
+                unitPrice: Field
+                quantity: Field
+                unitOfMeasure: Field
+                endDate: Field
+                description: Field
+                expectedDate: Field
+                productCode: Field
+                additionalCharges: Field
+                price: Field
+                purchaseOrderNumber: Field
+                lineNumber: Field
+                startDate: Field
+                productType: Field
+            required: false
+      page?:
+        type: string
+      fields?:
+        type: object
+        properties:
+          emails:
+            type: array
+            items: Field
+            required: false
+          amountDue: Field
+          total: Field
+          subtotal: Field
+          dueDate: Field
+          purchaseOrderNumber: Field
+          parties:
+            type: object
+            properties:
+              vendor:
+                type: object
+                properties:
+                  country: Field
+                  zipCode: Field
+                  address: Field
+                  headerName: Field
+                  city: Field
+                  street: Field
+                  name: Field
+                  headerAddress: Field
+                  headerPhone: Field
+                  state: Field
+                  headerUrl: Field
+                  addressBlock: Field
+                required: false
+              billTo:
+                type: object
+                properties:
+                  country: Field
+                  zipCode: Field
+                  address: Field
+                  city: Field
+                  street: Field
+                  name: Field
+                  state: Field
+                  addressBlock: Field
+                required: false
+              buyer:
+                type: object
+                properties:
+                  country: Field
+                  zipCode: Field
+                  address: Field
+                  headerName: Field
+                  city: Field
+                  street: Field
+                  name: Field
+                  headerAddress: Field
+                  headerPhone: Field
+                  state: Field
+                  headerUrl: Field
+                  addressBlock: Field
+                required: false
+              shipTo:
+                type: object
+                properties:
+                  country: Field
+                  zipCode: Field
+                  address: Field
+                  city: Field
+                  street: Field
+                  name: Field
+                  state: Field
+                  addressBlock: Field
+                required: false
+            required: false
+          invoiceNumber: Field
+          tax: Field
+          invoiceDate: Field
+          signatures:
+            type: array
+            items: Field
+            required: false
+          paymentTerms: Field
+      prompts?:
+        type: object
+        properties:
+          laborCharges: Prompt
+          laborChargesLines: Prompt
+          serialNumber: Prompt
+          workDescription: Prompt
+          subTotal: Prompt
+          processComments: Prompt
+  Prompt:
+    type: object
+    properties:
+      prompt?:
+        type: string
+      source?:
+        type: string
+      answer?: Field
+  Field:
+    type: object
+    properties:
+      confidenceScore?:
+        type: number
+      geometry?:
+        type: object
+        properties:
+          top:
+            type: number
+            required: false
+          width:
+            type: number
+            required: false
+          left:
+            type: number
+            required: false
+          height:
+            type: number
+            required: false
+      value?:
+        type: string
+  DocumentExecutionPostResponse:
+    type: object
+    properties:
+      status?:
+        type: string
+      documentName?:
+        type: string
+      id?:
+        type: string
+  DocumentExecutionGetResponse:
+    type: object
+    properties:
+      pages?:
+        type: array
+        items: Page
+      id?:
+        type: string
+      documentName?:
+        type: string
+      prompts?:
+        type: object
+        properties: {}
+      status?:
+        type: string
+annotationTypes:
+  amf-serverDescription:
+    type: any
+  amf-exclusiveMinimum:
+    type: any
+  amf-binding:
+    type: any
+  amf-pattern:
+    type: any
+  amf-payloads:
+    type: any
+  amf-exclusiveMaximum:
+    type: any
+  amf-consumes:
+    type: any
+  amf-additionalProperties:
+    type: any
+  amf-or:
+    type: any
+  amf-url:
+    type: any
+  amf-externalDocs:
+    type: any
+  amf-flow:
+    type: any
+  amf-oasDeprecated:
+    type: any
+  amf-contact:
+    type: any
+  amf-multipleOf:
+    type: any
+  amf-xor:
+    type: any
+  amf-not:
+    type: any
+  amf-callbacks:
+    type: any
+  amf-produces:
+    type: any
+  amf-format:
+    type: any
+  amf-license:
+    type: any
+  amf-summary:
+    type: any
+  amf-responses:
+    type: any
+  amf-maximum:
+    type: any
+  amf-tags:
+    type: any
+  amf-dependencies:
+    type: any
+  amf-readOnly:
+    type: any
+  amf-tuple:
+    type: any
+  amf-examples:
+    type: any
+  amf-collectionFormat:
+    type: any
+  amf-termsOfService:
+    type: any
+  amf-servers:
+    type: any
+  amf-xone:
+    type: any
+  amf-defaultResponse:
+    type: any
+  amf-baseUriParameters:
+    type: any
+  amf-parameters:
+    type: any
+  amf-minimum:
+    type: any
+  amf-recursive:
+    type: any
+  amf-and:
+    type: any
+securitySchemes:
+  bearerAuth:
+    type: OAuth 2.0
+    settings:
+      authorizationUri: ""
+      accessTokenUri: https://anypoint.mulesoft.com/accounts/api/v2/oauth2/token
+      scopes: []
+      authorizationGrants:
+        - implicit
+title: IDP - invoice-processing - 1.3.0
+baseUri: https://idp-rt.us-east-1.anypoint.mulesoft.com
+version: v1
+/api/v1/organizations/f475e946-3f3c-4402-8ba2-36625503930e/actions/8f288344-4ad5-40d7-a254-9879c100528d/versions/1.3.0/executions:
+  post:
+    displayName: postDocumentActionExecution
+    description: Submits an action version document execution
+    body:
+      multipart/form-data:
+        type: any
+    responses:
+      "201":
+        description: Created
+        body:
+          application/json: DocumentExecutionPostResponse
+    securedBy:
+      -
+        bearerAuth:
+          scopes: []
+/api/v1/organizations/f475e946-3f3c-4402-8ba2-36625503930e/actions/8f288344-4ad5-40d7-a254-9879c100528d/versions/1.3.0/executions/{executionId}:
+  get:
+    displayName: getDocumentActionExecution
+    description: Gets a document execution status
+    responses:
+      "200":
+        description: Success
+        body:
+          application/json: DocumentExecutionGetResponse
+    securedBy:
+      -
+        bearerAuth:
+          scopes: []
+  uriParameters:
+    executionId:
+      type: string
