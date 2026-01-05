@@ -133,5 +133,6 @@ output application/json
     </flow>
     <flow name="post:\api\v1\organizations\f475e946-3f3c-4402-8ba2-36625503930e\actions\8f288344-4ad5-40d7-a254-9879c100528d\versions\1.3.0\executions:multipart\form-data:api-config">
         <logger level="INFO" message="post:\api\v1\organizations\f475e946-3f3c-4402-8ba2-36625503930e\actions\8f288344-4ad5-40d7-a254-9879c100528d\versions\1.3.0\executions:multipart\form-data:api-config" />
+		<logger level="INFO" doc:name="Logger" doc:id="5b05f909-e1af-4c5f-8a79-beac95f7400d" message="logger added in post method flow"/>
     </flow>
 </mule>
